@@ -5,7 +5,12 @@ services:
     build:
      context: .
      dockerfile: Dockerfile.server
-    command: '/app/www/server/node_modules/.bin/cross-env NODE_ENV=production node server.js'
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm install
+        /app/www/server/node_modules/.bin/cross-env NODE_ENV=production node server.js
     volumes:
       - ./server:/app/www/server
       - learn_1:/server/node_modules
