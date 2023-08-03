@@ -6,4 +6,5 @@ please run this:
 url: localhost:3001
 
 -- PRODUCTION MODE --
-COMING SOON...
+1. docker compose --env-file .\server\.env  -f .\docker-compose.prod.yml build
+2. docker compose --env-file .\server\.env  -f .\docker-compose.prod.yml up -d
