@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  backend:
-    container_name: backend
+  erm_backend:
+    container_name: erm_backend
     build:
      context: .
      dockerfile: Dockerfile.server
@@ -14,8 +14,8 @@ services:
     networks:
       - app-networks
 
-  fe:
-    container_name: fe
+  erm_fe:
+    container_name: erm_fe
     build:
      context: .
      dockerfile: Dockerfile.fe
@@ -30,9 +30,9 @@ services:
     environment:
        - CHOKIDAR_USEPOLLING=true
 
-  db:
+  erm_db:
     image: mysql:5.7
-    container_name: db
+    container_name: erm_db
     networks:
       - app-networks
     environment:
