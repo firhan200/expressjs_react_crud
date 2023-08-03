@@ -8,7 +8,7 @@ const app = express()
 const port = 3000
 
 var corsOptions = {
-    origin: process.env.FE_URL,
+    origin: process.env.NODE_ENV === 'production' ? process.env.FE_URL_PROD : process.env.FE_URL,
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
