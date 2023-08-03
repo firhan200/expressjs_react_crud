@@ -24,7 +24,12 @@ services:
     build:
      context: .
      dockerfile: Dockerfile.fe
-    command: 'npm run build'
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm install
+        npm run build
     volumes:
       - ./fe:/app/www/fe
       - learn_1:/fe/node_modules
