@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    build:
+     context: .
+     dockerfile: Dockerfile.server
+    command: '/app/www/server/node_modules/.bin/cross-env NODE_ENV=production node server.js'
+    volumes:
+      - ./server:/app/www/server
+      - learn_1:/server/node_modules
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    networks:
+      - app-networks
+
+  fe:
+    container_name: fe
+    build:
+     context: .
+     dockerfile: Dockerfile.fe
+    command: 'npm run build'
+    volumes:
+      - ./fe:/app/www/fe
+      - learn_1:/fe/node_modules
+    ports:
+      - 3001:3001
+    networks:
+      - app-networks
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    networks:
+      - app-networks
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_TCP_PORT: ${DB_PORT}
+      MYSQL_ROOT_HOST: "%"
+    ports: 
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+     - learn_1:/var/lib/mysql
+
+networks:
+  app-networks:
+    driver: bridge
+
+volumes:
+  learn_1:
