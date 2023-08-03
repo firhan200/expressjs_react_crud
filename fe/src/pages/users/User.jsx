@@ -38,7 +38,9 @@ export default function User({ user }){
                         <Link to={`/edit/${user.id}`} className="bg-gray-200 rounded-lg px-4 py-1 text-sm hover:bg-gray-100 hover:drop-shadow-md ease-in duration-100">Edit</Link>
                     ) : null
                 }
-                <button onClick={deleteUser} disabled={ deleteMutation.isLoading } type="button" className="bg-red-100 rounded-lg px-4 py-1 text-sm hover:bg-red-50 hover:drop-shadow-md ease-in duration-100">Delete</button>
+                <button onClick={deleteUser} disabled={ deleteMutation.isLoading } type="button" className="bg-red-100 rounded-lg px-4 py-1 text-sm hover:bg-red-50 hover:drop-shadow-md ease-in duration-100">
+                    { deleteMutation.isLoading ? 'Deleting...' : 'Delete' }
+                </button>
             </div>
         </div>
     );
